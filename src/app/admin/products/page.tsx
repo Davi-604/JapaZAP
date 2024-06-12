@@ -1,6 +1,6 @@
 import { ProductPage } from '@/components/admin/products/ProductPage';
 
-export const AdminPage = () => {
+const Page = () => {
     return (
         <div>
             <ProductPage />
@@ -8,4 +8,4 @@ export const AdminPage = () => {
     );
 };
 
-export default AdminPage;
+export default Page;

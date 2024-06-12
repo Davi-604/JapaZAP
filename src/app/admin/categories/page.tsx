@@ -1,6 +1,6 @@
 import { CategoryPage } from '@/components/admin/categories/CategoryPage';
 
-export const AdminPage = () => {
+const Page = () => {
     return (
         <div>
             <CategoryPage />
@@ -8,4 +8,4 @@ export const AdminPage = () => {
     );
 };
 
-export default AdminPage;
+export default Page;

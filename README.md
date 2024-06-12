@@ -13,4 +13,6 @@
 
 -   This project has an integration with WhatsApp, where you can see the informations of your order, and into in contact with the restaurant.
 
+-   It has an admin panel too, where you can make the CRUD of your store. 
+
 -   Click [HERE](https://japa-zap.vercel.app) to see and use my project🌐

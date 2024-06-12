@@ -65,9 +65,7 @@ export const CartSideBar = () => {
                         onClick={() => setOpenCheckout(true)}
                         disabled={cart.length === 0}
                     >
-                        {cart.length > 0
-                            ? 'Finalizar pedido'
-                            : 'Não há pedidos no seu carrinho'}
+                        {cart.length > 0 ? 'Finalizar pedido' : 'Não há pedidos'}
                     </Button>
                 </div>
                 <CheckoutDialog open={openCheckout} onOpenChange={setOpenCheckout} />

@@ -1,11 +1,15 @@
-import { FishOffIcon, GhostIcon } from 'lucide-react';
+import { FishOffIcon } from 'lucide-react';
 
-export const ProductEmpty = () => (
+type Props = {
+    bigWarning?: string;
+    message?: string;
+};
+export const ProductEmpty = ({ message, bigWarning }: Props) => (
     <div className="w-full text-center my-10">
-        <div className="text-4xl font-semibold mb-5 flex justify-center items-center gap-5">
-            Ops!
+        <div className="text-lg sm:text-2xl text-muted-foreground font-semibold mb-5 flex justify-center items-center gap-3 sm:gap-5">
+            {bigWarning}
             <FishOffIcon width={32} height={32} />
         </div>
-        <p>Não encontramos nenhum produto nessa categoria...</p>
+        <p className="text-muted-foreground">{message}</p>
     </div>
 );

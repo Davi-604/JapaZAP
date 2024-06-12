@@ -33,7 +33,9 @@ export const ProductGridItem = ({ product }: Props) => {
             </div>
             <div className="mt-2 flex flex-col gap-2">
                 <p className="text-lg font-medium">{product.name}</p>
-                <p className="font-semibold ">R$ {product.price.toFixed(2)}</p>
+                <p className="font-semibold ">
+                    R$ {product.price.toFixed(2).replace('.', ',')}
+                </p>
                 <Button variant="destructive" onClick={handleAddBtn}>
                     Adicionar
                 </Button>

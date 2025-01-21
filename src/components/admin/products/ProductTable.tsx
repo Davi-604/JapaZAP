@@ -27,6 +27,7 @@ export const ProductTable = ({
                 <TableRow>
                     <TableHead>Imagem</TableHead>
                     <TableHead>Nome</TableHead>
+                    <TableHead className="hidden md:table-cell">Descrição</TableHead>
                     <TableHead className="hidden sm:table-cell">Preço</TableHead>
                     <TableHead>Ações</TableHead>
                 </TableRow>
@@ -41,6 +42,9 @@ export const ProductTable = ({
                             />
                         </TableCell>
                         <TableCell>{product.name}</TableCell>
+                        <TableCell className="hidden max-w-[200px] md:table-cell">
+                            {product.description}
+                        </TableCell>
                         <TableCell className="hidden sm:table-cell">
                             {`R$ ${product.price.toFixed(2).replace('.', ',')}`}
                         </TableCell>

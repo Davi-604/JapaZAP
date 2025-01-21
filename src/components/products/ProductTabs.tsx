@@ -35,11 +35,11 @@ export const ProductTabs = () => {
     return (
         <>
             {categories.length > 0 && !loading && (
-                <Tabs defaultValue="sushis" className="px-5">
+                <Tabs defaultValue={categories[0].name.toLowerCase()} className="px-5">
                     <TabsList className="flex">
                         {categories.map((item) => (
                             <TabsTrigger
-                                className="flex-1"
+                                className="flex-1 hover:opacity-70 transition-all ease-in"
                                 key={item.name}
                                 value={item.name.toLowerCase()}
                             >
@@ -83,7 +83,12 @@ export const ProductTabs = () => {
                     ))}
                 </Tabs>
             )}
-            {categories.length === 0 && loading && <ProductSkeleton />}
+            {categories.length === 0 && loading && (
+                <ProductEmpty
+                    bigWarning="Ops!"
+                    message="Não encontramos nenhuma categoria para exibir..."
+                />
+            )}
         </>
     );
 };

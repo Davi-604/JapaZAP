@@ -1,27 +1,15 @@
 import { Button } from '@/components/ui/button';
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form, FormField } from '@/components/ui/form';
 import { adminApi } from '@/services/adminApi';
-import { api } from '@/services/api';
 import { Product } from '@/types/Product';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-const addSchema = z.object({
-    nameField: z.string().optional(),
-    imageField: z.string().url('Link inválido').optional(),
-    priceField: z.string().optional(),
-});
+import { ProductEditFormField } from './ProductEditFormField';
+import { ProductTextAreaField } from './ProductTextAreaField';
+import { ProductEditImageField } from './ProductEditImageField';
+import { productSchema } from '@/schemas/productSchema';
 
 type Props = {
     category_id: number;
@@ -37,22 +25,24 @@ export const ProductEditForm = ({
 }: Props) => {
     const [loading, setLoading] = useState(false);
 
-    const form = useForm<z.infer<typeof addSchema>>({
-        resolver: zodResolver(addSchema),
+    const form = useForm<z.infer<typeof productSchema>>({
+        resolver: zodResolver(productSchema),
         defaultValues: {
             nameField: product.name,
             imageField: product.image,
+            descriptionField: product.description,
             priceField: product.price.toFixed(2).toString(),
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof addSchema>) => {
+    const onSubmit = async (values: z.infer<typeof productSchema>) => {
         const formatedPrice = values.priceField?.replace(',', '.');
 
         setLoading(true);
         const editedProduct = await adminApi.editProduct(category_id, product.id, {
             image: values.imageField,
             name: values.nameField,
+            description: values.descriptionField,
             price: parseFloat(formatedPrice ? formatedPrice : ''),
         });
         setLoading(false);
@@ -74,72 +64,53 @@ export const ProductEditForm = ({
                         control={form.control}
                         name="nameField"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Nome</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        autoFocus
-                                        className="text-ellipsis whitespace-normal"
-                                        placeholder="Digite o nome do produto"
-                                        onChange={(e) => {
-                                            field.onChange(e);
-                                            form.clearErrors('nameField');
-                                        }}
-                                        value={field.value}
-                                    />
-                                </FormControl>
-                                <FormMessage className="text-yellow-500" />
-                            </FormItem>
+                            <ProductEditFormField
+                                name="nameField"
+                                label="Nome"
+                                placeholder="Digite o seu nome"
+                                field={field}
+                                form={form}
+                                focus
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="descriptionField"
+                        render={({ field }) => (
+                            <ProductTextAreaField
+                                name="descriptionField"
+                                label="Descrição"
+                                field={field}
+                                form={form}
+                            />
                         )}
                     />
                     <FormField
                         control={form.control}
                         name="imageField"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Imagem</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        className="text-ellipsis whitespace-normal"
-                                        placeholder="Digite o link da sua imagem"
-                                        onChange={(e) => {
-                                            field.onChange(e);
-                                            form.clearErrors('imageField');
-                                        }}
-                                        value={field.value}
-                                    />
-                                </FormControl>
-                                <FormMessage className="text-yellow-500" />
-                            </FormItem>
+                            <ProductEditImageField
+                                label="Imagem"
+                                name="imageField"
+                                field={field}
+                                form={form}
+                            />
                         )}
                     />
                     <FormField
                         control={form.control}
                         name="priceField"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Preço</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        className="text-ellipsis whitespace-normal"
-                                        placeholder="Digite o preço do produto"
-                                        onChange={(e) => {
-                                            field.onChange(
-                                                e.target.value.replace(/[^0-9,]/g, '')
-                                            );
-                                            form.clearErrors('priceField');
-                                        }}
-                                        value={field.value?.replace('.', ',')}
-                                        onKeyUp={(e) => {
-                                            if (e.code.toLowerCase() === 'enter') {
-                                                e.preventDefault();
-                                                form.handleSubmit(onSubmit)();
-                                            }
-                                        }}
-                                    />
-                                </FormControl>
-                                <FormMessage className="text-yellow-500" />
-                            </FormItem>
+                            <ProductEditFormField
+                                name="priceField"
+                                label="Preço"
+                                field={field}
+                                placeholder="Digite o preço do produto"
+                                form={form}
+                                priceField
+                                onSubmit={onSubmit}
+                            />
                         )}
                     />
                     <div className="flex items-center justify-between mt-5 ">

@@ -5,13 +5,15 @@ import { getCookie } from 'cookies-next';
 
 type AddProductData = {
     name: string;
+    description?: string;
     price: number;
-    image: string;
+    image: File | string;
 };
 type UpdateProductData = {
     name?: string;
+    description?: string;
     price?: number;
-    image?: string;
+    image?: File | string;
 };
 
 type AddCategoryData = {

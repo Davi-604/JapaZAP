@@ -18,7 +18,7 @@ export const StepFinish = () => {
             </p>
             <p>
                 Agora envie o seu pedido ao nosso WhatsApp para concluir.
-                <br /> Nossso atendente irá te guiar sobre o acompanhamneto do seu pedido.
+                <br /> Nossso atendente irá te guiar sobre o acompanhamento do seu pedido.
             </p>
             <Button className="mt-5">
                 <Link target="_blank" href={linkZap}>

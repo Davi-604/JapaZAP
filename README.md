@@ -67,6 +67,22 @@ O design é **totalmente responsivo**, garantindo uma experiência de uso consis
 
     ---
 
+## Links 🌐
+
+<a href="https://www.linkedin.com/posts/davicarvalhodev604_javascript-reactjs-nextjs-activity-7288266904652161024-fh9s?utm_source=share&utm_medium=member_desktop" target='_blank'>
+    Postagem no linkedIn
+</a>
+<br/><br/>
+<a href="https://youtu.be/AvRdahknkb8?si=l0KOs0jYdRO-Ikzk" target='_blank'>
+    Vídeo no youtube
+</a>
+<br/><br/>
+<a href="https://github.com/Davi-604/Japa-zap-static" target='_blank'>
+    Projeto estático
+</a>
+
+---
+
 ## Créditos 🙌
 Este projeto foi baseado no curso da [B7web](https://b7web.com.br), com adaptações e melhorias realizadas por mim para abrangir mais funcionalidades e testar os meus conhecimentos.
 
